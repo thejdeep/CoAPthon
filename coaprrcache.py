@@ -1,17 +1,16 @@
-from cachetools import LRUCache
+from cachetools import RRCache
 from coapthon.caching.coapcache import CoapCache
 
 __author__ = 'Emilio Vallati'
 
 
-class CoapLRUCache(CoapCache):
+class CoapRRCache(CoapCache):
     def __init__(self, max_dim):
         """
 
         :param max_dim:
         """
-        print "Using LRU Cache with dimension : "+str(max_dim)
-        self.cache = LRUCache(maxsize=max_dim)
+        self.cache = RRCache(maxsize=max_dim)
 
     def update(self, key, element):
         """
@@ -32,6 +31,7 @@ class CoapLRUCache(CoapCache):
         :return: CacheElement
         """
         try:
+            print "Getting cache response"
             response = self.cache[key.hashkey]
         except KeyError:
             print "problem here"

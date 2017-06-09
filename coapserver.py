@@ -3,7 +3,7 @@
 import getopt
 import sys
 from coapthon.server.coap import CoAP
-from exampleresources import BasicResource, Long, Separate, Storage, Big, voidResource, XMLResource, ETAGResource, \
+from exampleresources import BasicResource,BasicResource1,BasicResource2,BasicResource3,BasicResource4,BasicResource5,BasicResource6,BasicResource7 , Long, Separate, Storage, Big, voidResource, XMLResource, ETAGResource, \
     Child, \
     MultipleEncodingResource, AdvancedResource, AdvancedResourceSeparate
 
@@ -14,6 +14,13 @@ class CoAPServer(CoAP):
     def __init__(self, host, port, multicast=False):
         CoAP.__init__(self, (host, port), multicast)
         self.add_resource('basic/', BasicResource())
+        self.add_resource('basic1/', BasicResource1())
+        self.add_resource('basic2/', BasicResource2())
+        self.add_resource('basic3/', BasicResource3())
+        self.add_resource('basic4/', BasicResource4())
+        self.add_resource('basic5/', BasicResource5())
+        self.add_resource('basic6/', BasicResource6())
+        self.add_resource('basic7/', BasicResource7())
         self.add_resource('storage/', Storage())
         self.add_resource('separate/', Separate())
         self.add_resource('long/', Long())

@@ -28,6 +28,7 @@ class Message(object):
         self._duplicated = None
         self._timestamp = None
         self._version = 1
+        self._usecache = True
 
     @property
     def version(self):
@@ -37,6 +38,16 @@ class Message(object):
         :return: the version
         """
         return self._version
+
+    @property
+    def cache(self):
+        return self._usecache
+
+    @cache.setter
+    def cache(self,temp):
+        if not isinstance(temp,bool):
+            raise AttributeError
+        self._usecache = temp
 
     @version.setter
     def version(self, v):

@@ -32,6 +32,15 @@ class Request(Message):
         value = value[:-1]
         return value
 
+    @property
+    def cache_handler(self):
+        return self.cache
+
+
+    @cache_handler.setter
+    def cache_handler(self,temp):
+        self.cache(temp)
+
     @uri_path.setter
     def uri_path(self, path):
         """
@@ -51,6 +60,10 @@ class Request(Message):
         if len(tmp) > 1:
             query = tmp[1]
             self.uri_query = query
+
+
+
+
 
     @uri_path.deleter
     def uri_path(self):

@@ -132,6 +132,7 @@ class CoAP(object):
         while not self.stopped.isSet():
             try:
                 data, client_address = self._socket.recvfrom(4096)
+                print "Receiving request\n"
                 if len(client_address) > 2:
                     client_address = (client_address[0], client_address[1])
             except socket.timeout:

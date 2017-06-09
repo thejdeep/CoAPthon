@@ -32,7 +32,7 @@ class CoAP(object):
     """
     Implementation of the Forward Proxy
     """
-    def __init__(self, server_address, multicast=False, starting_mid=None, cache=False, sock=None):
+    def __init__(self, server_address, multicast=False, starting_mid=None, cache=False, dim_len=2,method_arg=0,sock=None):
         """
         Initialize the Forward Proxy.
 
@@ -54,7 +54,7 @@ class CoAP(object):
         self._observeLayer = ObserveLayer()
 
         if self.cache_enable:
-            self._cacheLayer = CacheLayer(defines.FORWARD_PROXY)
+            self._cacheLayer = CacheLayer(defines.FORWARD_PROXY,dim_len,method_arg)
         else:
             self._cacheLayer = None
 
@@ -225,7 +225,8 @@ class CoAP(object):
             call to the cache layer to check if there's a cached response for the request
             if not, call the forward layer
             """
-            if self._cacheLayer is not None:
+
+            if self._cacheLayer is not None and transaction.request.cache:
                 transaction = self._cacheLayer.receive_request(transaction)
 
                 if transaction.cacheHit is False:

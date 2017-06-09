@@ -29,6 +29,170 @@ class BasicResource(Resource):
     def render_DELETE(self, request):
         return True
 
+class BasicResource1(Resource):
+    def __init__(self, name="BasicResource1", coap_server=None):
+        super(BasicResource1, self).__init__(name, coap_server, visible=True,
+                                            observable=True, allow_children=True)
+        self.payload = "Basic Resource1"
+        self.resource_type = "rt1"
+        self.content_type = "text/plain"
+        self.interface_type = "if1"
+
+    def render_GET(self, request):
+        return self
+
+    def render_PUT(self, request):
+        self.edit_resource(request)
+        return self
+
+    def render_POST(self, request):
+        res = self.init_resource(request, BasicResource1())
+        return res
+
+    def render_DELETE(self, request):
+        return True
+
+class BasicResource2(Resource):
+    def __init__(self, name="BasicResource2", coap_server=None):
+        super(BasicResource2, self).__init__(name, coap_server, visible=True,
+                                            observable=True, allow_children=True)
+        self.payload = "Basic Resource2"
+        self.resource_type = "rt1"
+        self.content_type = "text/plain"
+        self.interface_type = "if1"
+
+    def render_GET(self, request):
+        return self
+
+    def render_PUT(self, request):
+        self.edit_resource(request)
+        return self
+
+    def render_POST(self, request):
+        res = self.init_resource(request, BasicResource2())
+        return res
+
+    def render_DELETE(self, request):
+        return True
+
+class BasicResource3(Resource):
+    def __init__(self, name="BasicResource3", coap_server=None):
+        super(BasicResource3, self).__init__(name, coap_server, visible=True,
+                                            observable=True, allow_children=True)
+        self.payload = "Basic Resource3"
+        self.resource_type = "rt1"
+        self.content_type = "text/plain"
+        self.interface_type = "if1"
+
+    def render_GET(self, request):
+        return self
+
+    def render_PUT(self, request):
+        self.edit_resource(request)
+        return self
+
+    def render_POST(self, request):
+        res = self.init_resource(request, BasicResource3())
+        return res
+
+    def render_DELETE(self, request):
+        return True
+
+
+class BasicResource4(Resource):
+    def __init__(self, name="BasicResource4", coap_server=None):
+        super(BasicResource4, self).__init__(name, coap_server, visible=True,
+                                            observable=True, allow_children=True)
+        self.payload = "Basic Resource4"
+        self.resource_type = "rt1"
+        self.content_type = "text/plain"
+        self.interface_type = "if1"
+
+    def render_GET(self, request):
+        return self
+
+    def render_PUT(self, request):
+        self.edit_resource(request)
+        return self
+
+    def render_POST(self, request):
+        res = self.init_resource(request, BasicResource4())
+        return res
+
+    def render_DELETE(self, request):
+        return True
+
+class BasicResource5(Resource):
+    def __init__(self, name="BasicResource5", coap_server=None):
+        super(BasicResource5, self).__init__(name, coap_server, visible=True,
+                                            observable=True, allow_children=True)
+        self.payload = "Basic Resource5"
+        self.resource_type = "rt1"
+        self.content_type = "text/plain"
+        self.interface_type = "if1"
+
+    def render_GET(self, request):
+        return self
+
+    def render_PUT(self, request):
+        self.edit_resource(request)
+        return self
+
+    def render_POST(self, request):
+        res = self.init_resource(request, BasicResource5())
+        return res
+
+    def render_DELETE(self, request):
+        return True
+
+
+class BasicResource6(Resource):
+    def __init__(self, name="BasicResource6", coap_server=None):
+        super(BasicResource6, self).__init__(name, coap_server, visible=True,
+                                            observable=True, allow_children=True)
+        self.payload = "Basic Resource6"
+        self.resource_type = "rt1"
+        self.content_type = "text/plain"
+        self.interface_type = "if1"
+
+    def render_GET(self, request):
+        return self
+
+    def render_PUT(self, request):
+        self.edit_resource(request)
+        return self
+
+    def render_POST(self, request):
+        res = self.init_resource(request, BasicResource6())
+        return res
+
+    def render_DELETE(self, request):
+        return True
+
+
+
+class BasicResource7(Resource):
+    def __init__(self, name="BasicResource7", coap_server=None):
+        super(BasicResource7, self).__init__(name, coap_server, visible=True,
+                                            observable=True, allow_children=True)
+        self.payload = "Basic Resource7"
+        self.resource_type = "rt1"
+        self.content_type = "text/plain"
+        self.interface_type = "if1"
+
+    def render_GET(self, request):
+        return self
+
+    def render_PUT(self, request):
+        self.edit_resource(request)
+        return self
+
+    def render_POST(self, request):
+        res = self.init_resource(request, BasicResource7())
+        return res
+
+    def render_DELETE(self, request):
+        return True
 
 class Storage(Resource):
     def __init__(self, name="StorageResource", coap_server=None):

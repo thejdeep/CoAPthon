@@ -8,12 +8,12 @@ __author__ = 'Emilio Vallati'
 
 class CacheLayer(object):
 
-    def __init__(self, mode, max_dim=2048):
+    def __init__(self, mode, max_dim,method_arg):
         """
 
         :param max_dim:
         """
-        self.cache = Cache(mode, max_dim)
+        self.cache = Cache(mode, max_dim,method_arg)
 
     def receive_request(self, transaction):
         """

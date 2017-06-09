@@ -1,7 +1,14 @@
 import time
 
+from coaplfucache import CoapLFUCache
+from coaprrcache import CoapRRCache
 from coaplrucache import CoapLRUCache
+from coaplifocache import CoapLIFOCache
+from coapfifocache import CoapFIFOCache
+from coapmfucache import CoapMFUCache
+from slrucache import CoapSLRUCache
 from coapthon import utils
+from slrucache import slrucache
 from coapthon.messages.request import *
 from coapthon.messages.message import Message
 
@@ -11,16 +18,30 @@ __author__ = 'Emilio Vallati'
 
 class Cache(object):
 
-    def __init__(self, mode, max_dim):
+    def __init__(self, mode, max_dim,method_arg):
         """
 
         :param max_dim: max number of elements in the cache
         :param mode: used to differentiate between a cache used in a forward-proxy or in a reverse-proxy
         """
-
+        print "Dimension of cache : "+str(max_dim)
+        print "Method Number selected : "+str(method_arg)
         self.max_dimension = max_dim
         self.mode = mode
-        self.cache = CoapLRUCache(max_dim)
+        if(method_arg==0):
+            self.cache = CoapLRUCache(max_dim)
+        elif(method_arg==1):
+            self.cache = CoapLFUCache(max_dim)
+        elif(method_arg==2):
+            self.cache=CoapRRCache(max_dim)
+        elif(method_arg==3):
+            self.cache=CoapLIFOCache(max_dim)
+        elif(method_arg==4):
+            self.cache = CoapFIFOCache(max_dim)
+        elif(method_arg==5):
+            self.cache = CoapMFUCache(max_dim)
+        elif(method_arg==6):
+            self.cache = CoapSLRUCache(max_dim)
 
     def cache_add(self, request, response):
         """
@@ -143,6 +164,7 @@ class Cache(object):
         :param request:
         :return:
         """
+        print "MARKING CACHED VALUE AS BAD"
         print "element.response = ", element.cached_response
         print "element.uri = ", element.uri
         print "element.freshness = ", element.freshness
@@ -167,7 +189,7 @@ class CacheElement(object):
         self.freshness = True
         self.key = cache_key
         self.cached_response = response
-        self.max_age = max_age
+        self.max_age = 20
         self.creation_time = time.time()
         self.uri = request.proxy_uri
 
@@ -192,6 +214,7 @@ class CacheKey(object):
         """
         print "creating key"
         if (request.payload is not None):
+            print "PAYLOAD IN CACHE: ", request.payload
             self._payload = request.payload
         else:
             self._payload = None
@@ -202,18 +225,24 @@ class CacheKey(object):
         """
 
         self._options = []
+        self.temp_key=""
         for option in request.options:
             if (utils.check_nocachekey(option) is False) and (utils.is_uri_option(option.number) is False):
+                print "ANY option here"
                 self._options.append(option)
+                if(option._number==11):
+                    self.temp_key=str(option.value)
 
         """
         creating a usable key for the cache structure
         """
 
         option_str = ', '.join(map(str, self._options))
+        print option_str, "OPTION STRING"
         self._list = [self._payload, self._method, option_str]
 
-        self.hashkey = ', '.join(map(str, self._list))
+        #self.hashkey = ', '.join(map(str, self._list))
+        self.hashkey=self.temp_key
         self.debug_print()
 
     def debug_print(self):
